@@ -1,0 +1,45 @@
+// dbaas 
+
+-> mongodb -> install necessary package : pip install pymongo , pip install pymongo[srv]
+
+----------insert-------------
+ 
+def getdatabase():
+	from pymongo import MongoClient
+	import pymongo
+	conn = "mongodb+srv://karthi:karthi1412@cluster0.vill0.mongodb.net/clouddata?retryWrites=true&w=majority"
+	client = MongoClient(conn)
+	return client['clouddata']
+
+dbname = getdatabase()
+collection_name = dbname["clouddata_students"]   # cloud data students is the collection name..
+details = {
+    "Name" : "Karthick",
+    "Reg no":"19IT046",
+
+    "Department":"Information Technology",
+    "year":3
+}        # if many [{doc1} , {doc2} ]
+
+collection_name.insert_one(details)  # if multiple data -> .insert_many(eu)
+item_details = collection_name.find()
+for item in item_details:
+    print(item)
+
+# but all those , you need to give the above code.. like dename  collec_name,item_det and forloop to print data..
+-------retrieve data-------
+print(collection_name.find_one({"Name":"Karthick"}))    # retrieve data...
+
+-----------updating-------
+
+res = collection_name.update_many(
+		{"Name":"Aravind V"},
+		{
+			"$set":{
+					"name":"Arvind"
+					}
+		})
+
+----------deleting----------
+res = collection_name.delete_one({"Name":"Karthick"})
+
