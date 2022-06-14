@@ -1,0 +1,66 @@
+1-> install hadoop in ubuntu..
+2-> if installed it will run in localhost:50070 , import any textfile to count to it.
+3-> Let us create a folder named wordcount tutorial and have a input data file, and the same will contain the list of words which is to be fed as input to our Hadoop dfs
+4-> in wordcount tutorial folder , we have a 2files .jar , .java(contains code for hadoop)
+5-> run hadoop jar [path for jarfile] WordCount /wordcounttutorial/input /wordcounttutorial/output
+6-> open it.. hadoop dfs -cat /wordcounttutorial/output/*
+
+--- java file code ----
+WordCount.java 
+import java.io.IOException; import java.util.StringTokenizer; import org.apache.hadoop.conf.Configuration; import org.apache.hadoop.fs.Path; import org.apache.hadoop.io.IntWritable; import org.apache.hadoop.io.Text;
+
+import org.apache.hadoop.mapreduce.Job;
+
+import org.apache.hadoop.mapreduce.Mapper; import
+
+org.apache.hadoop.mapreduce.Reducer; import
+
+org.apache.hadoop.mapreduce.lib.input.FileInputFormat; import
+
+org.apache.hadoop.mapreduce.lib.output.FileOutputFormat; public class WordCount { public static class TokenizerMapper
+
+extends Mapper<Object, Text, Text, IntWritable>{ private final static IntWritable one = new IntWritable(1); private Text word = new Text();
+
+public void map(Object key, Text value, Context context ) throws IOException, InterruptedException {
+
+StringTokenizeritr = new StringTokenizer(value.toString()); while (itr.hasMoreTokens()) { word.set(itr.nextToken()); context.write(word, one);
+
+}
+
+
+
+}
+
+}
+
+public static class IntSumReducer
+
+extends Reducer<Text,IntWritable,Text,IntWritable> { private IntWritable result = new IntWritable(); public void reduce(Text key, Iterable<IntWritable> values,
+
+Context context
+
+) throwsIOException, InterruptedException {
+
+int sum = 0;
+
+for (IntWritableval : values) {
+
+sum += val.get();
+
+}
+
+result.set(sum);
+
+context.write(key, result);
+
+}
+
+}
+public static void main(String[] args) throws Exception { Configuration conf = new Configuration();
+
+Job job = Job.getInstance(conf, "word count"); job.setJarByClass(WordCount.class); job.setMapperClass(TokenizerMapper.class); job.setCombinerClass(IntSumReducer.class); job.setReducerClass(IntSumReducer.class); job.setOutputKeyClass(Text.class); job.setOutputValueClass(IntWritable.class);
+
+FileInputFormat.addInputPath(job, new Path(args[0])); FileOutputFormat.setOutputPath(job, new Path(args[1])); System.exit(job.waitForCompletion(true) ? 0 : 1);
+}
+
+}
