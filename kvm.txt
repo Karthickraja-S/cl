@@ -1,0 +1,17 @@
+1-> lsb_release -a : ubuntu version
+2-> ip a|more : ip
+3-> uname -a
+4-> sudo su : to change to root user
+5-> apt-get install qemu-kvm libvirt-bin bridge-utils virt-manager qemu-system
+6-> if any got error we need to kill procss , ps -ef|grep apt , see the process id
+7-> kill -9 [pid] , try reinstalling the packages,.
+8-> sudo nano /etc/libvirt/libvirt.conf , configure the file...
+listen_addr = "0.0.0.0"
+unix_sock_group = "libvirt"
+unix_sock_ro_perms = "0777"
+unix_sock_rw_perms = "0777"
+unix_sock_dir = "/var/run/libvirt"
+auth_unix_ro = "none"
+auth_unix_rw = "none"
+9-> restart libvirt use script : /etc/init.d/libvirtd restart
+10-> virsh -> give nodeinfo.. (opens virtualization terminal use any downloaded image and use virtualised PF)
