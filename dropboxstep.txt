@@ -9,7 +9,7 @@
 import dropbox
 # below is copied access token.
 dropbox_access_token= "sl.BKkT8Tml03EgOO4ARcppxC3Kix-t7b1jecByAsFpE6gnIlcNrRHZqm9Na1ddK_emtF_b22rQGMnYGrhUB75mbRgMQaFeFiDnhKzblqrhcQ1ObYPxeFRgyNjmvnKIqxltTEGM41sTSotj"
-dropbox_path= "/zoques.txt"        # just a path to store in dropbox portal with zohocsnippet name
+dropbox_path= "/zoques.txt"        # just a path to store in dropbox portal with zoques name
 computer_path=r"E:\zo.txt"          # my file in my computer path..
 client = dropbox.Dropbox(dropbox_access_token)
 print("[SUCCESS] dropbox account linked")
