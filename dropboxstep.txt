@@ -1,0 +1,23 @@
+1. login with dropbox.... ( dropbox.com/developers/apps )
+2. create app -> fulldropbox -> permissions -> tick all individual scopes to write mode -> submit
+3. in settings -> generate access token -> copy token
+4. make coding run..
+5. check in dropbox.com/h -> the file uploaded will be there.
+
+ ---- pip install dropbox ---
+
+import dropbox
+# below is copied access token.
+dropbox_access_token= "sl.BKkT8Tml03EgOO4ARcppxC3Kix-t7b1jecByAsFpE6gnIlcNrRHZqm9Na1ddK_emtF_b22rQGMnYGrhUB75mbRgMQaFeFiDnhKzblqrhcQ1ObYPxeFRgyNjmvnKIqxltTEGM41sTSotj"
+dropbox_path= "/zoques.txt"        # just a path to store in dropbox portal with zohocsnippet name
+computer_path=r"E:\zo.txt"          # my file in my computer path..
+client = dropbox.Dropbox(dropbox_access_token)
+print("[SUCCESS] dropbox account linked")
+client.files_upload(open(computer_path, "rb").read(), dropbox_path)
+print("[UPLOADED] {}".format(computer_path))
+
+metadata, f = client.files_download('/zoques.txt')
+out = open("downloadedfromdropbox.txt", 'wb')
+out.write(f.content)
+out.close()
+print("[SUCCESS] downloaded")
