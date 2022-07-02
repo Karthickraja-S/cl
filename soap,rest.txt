@@ -13,7 +13,7 @@
 
 // rest 
 
-1-> download all necessary packages-> npm init , npm i express , npm i joi (but need to have in a single file).
+1-> download all necessary packages-> npm init , npm i express , npm i joi , npm i -g nodemon (but need to have in a single file).
 2-> server.js
 const express = require("express");
 const Joi = require("Joi");
