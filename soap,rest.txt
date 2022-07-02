@@ -3,7 +3,7 @@
 // soap implementation ...
 1. eclipse -> file -> new -> dynamic web project
 2. give project name , click next ( tomcat server 9.0 - target runtime ) check it...
-3. Create two files people.java and peopleimpl.java , After entering the content of the files, right click on and click web services (peopleimpl -> only has interface code , people have getter and setter methods).
+3. Create two files people.java(include interface) and peopleimpl.java(has int age,name,void getage(),getname()) right click people.java and click web services( people have getter and setter methods , return name like .).
 4. publish and overwrite(checkbox tick) , finish finish..
 5. generates wsdl file -> next next.. start server -->
 6. if u got error u need to kill the running process port 
